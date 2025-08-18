@@ -920,12 +920,6 @@ input, textarea, select {
     group: project-card;
 }
 
-.project-card:hover {
-    transform: translateY(-12px);
-    border-color: var(--primary-color);
-    box-shadow: var(--shadow-glow);
-}
-
 .project-number {
     position: absolute;
     top: var(--spacing-lg);
@@ -959,10 +953,6 @@ input, textarea, select {
     transition: transform var(--transition-slow);
 }
 
-.project-card:hover img {
-    transform: scale(1.1);
-}
-
 .project-overlay {
     position: absolute;
     top: 0;
@@ -975,10 +965,6 @@ input, textarea, select {
     justify-content: center;
     opacity: 0;
     transition: all var(--transition-normal);
-}
-
-.project-card:hover .project-overlay {
-    opacity: 1;
 }
 
 .project-links {

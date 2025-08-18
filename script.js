@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- SELETORES DO DOM ---
     const body = document.body;
     const preloader = document.getElementById('preloader');
     const splineViewer = document.querySelector('spline-viewer');
@@ -36,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'c++', iconClass: 'devicon-cplusplus-plain' }
     ];
 
-    // --- MÓDULO: PRELOADER ---
     function initPreloader() {
         if (!splineViewer || !preloader) return;
         let isLoaded = false;
@@ -49,19 +47,16 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         splineViewer.addEventListener('load', hidePreloader);
-        setTimeout(hidePreloader, 4000); // Failsafe para esconder o preloader
+        setTimeout(hidePreloader, 4000); 
     }
 
-    // --- MÓDULO: NAVBAR & NAVEGAÇÃO ---
     function initNavbar() {
         if (!navbar) return;
-        
-        // Efeito de "scrolled"
+
         window.addEventListener('scroll', () => {
             navbar.classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        // Indicador de navegação no hover
         if (navLinksContainer && navIndicator) {
             navLinks.forEach(link => {
                 link.addEventListener('mouseenter', () => {
@@ -76,13 +71,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 navIndicator.style.width = '0';
             });
         }
-        
-        // Menu Mobile
+
         if(mobileMenuToggle && navMenu) {
             mobileMenuToggle.addEventListener('click', () => {
                 navMenu.classList.toggle('active');
                 mobileMenuToggle.classList.toggle('active');
-                body.classList.toggle('no-scroll'); // Opcional: para travar o scroll do body
+                body.classList.toggle('no-scroll'); 
             });
 
             navLinks.forEach(link => {
@@ -97,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- MÓDULO: EFEITOS DE TEXTO E CURSOR ---
     function initTypingEffect() {
         if (typingElement) {
             new Typed(typingElement, {
@@ -129,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- MÓDULO: CARROSSEL DE SKILLS ---
     function initSkillsCarousel() {
         if (!skillsList || !skillsCarousel) return;
 
@@ -140,14 +132,14 @@ document.addEventListener('DOMContentLoaded', () => {
             </li>
         `).join('');
 
-        skillsList.innerHTML = skillItemsHTML.repeat(2); // Duplicar para o efeito infinito
+        skillsList.innerHTML = skillItemsHTML.repeat(2); 
         
         if(skillControls) {
             skillControls.addEventListener('click', (e) => {
                 const button = e.target.closest('.skill-control');
                 if(!button) return;
 
-                skillsList.style.animationPlayState = 'paused'; // Pausa a animação CSS ao interagir
+                skillsList.style.animationPlayState = 'paused'; 
 
                 const skillItemWidth = skillsList.querySelector('.skill-item').offsetWidth;
                 const gap = parseInt(window.getComputedStyle(skillsList).gap);
@@ -159,7 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     skillsCarousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
                 }
 
-                // Retoma a animação após um tempo
                 setTimeout(() => {
                     skillsList.style.animationPlayState = 'running';
                 }, 3000);
@@ -167,7 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- MÓDULO: FILTRO DE PROJETOS ---
     function initProjectsFilter() {
         if (!projectsFilter || projectCards.length === 0) return;
 
@@ -175,13 +165,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const target = e.target;
             if (!target.classList.contains('filter-btn')) return;
 
-            // Atualiza o botão ativo
             projectsFilter.querySelector('.active').classList.remove('active');
             target.classList.add('active');
 
             const filter = target.dataset.filter;
 
-            // Filtra os cards
             projectCards.forEach(card => {
                 const category = card.dataset.category;
                 const shouldShow = filter === 'all' || filter === category;
@@ -190,7 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- MÓDULO: ANIMAÇÕES DE SCROLL ---
     function initScrollAnimations() {
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -206,37 +193,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.querySelectorAll('.fade-in-on-scroll').forEach((el, index) => {
             if (el.classList.contains('project-card')) {
-                el.style.setProperty('--card-index', index % 3); // Para reiniciar a animação por linha
+                el.style.setProperty('--card-index', index % 3); 
             }
             observer.observe(el);
         });
     }
 
-    // --- MÓDULO: FORMULÁRIO DE CONTATO ---
-    function initContactForm() {
-        if (!contactForm) return;
+function initContactForm() {
+    if (!contactForm) return;
 
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const submitButton = contactForm.querySelector('button[type="submit"]');
-            const btnText = submitButton.querySelector('.btn-text');
-            
-            // Simulação de envio
-            btnText.textContent = 'sending...';
-            submitButton.disabled = true;
+    async function handleSubmit(event) {
+        event.preventDefault();
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const btnText = submitButton.querySelector('.btn-text');
+        const formData = new FormData(event.target);
 
-            setTimeout(() => {
-                btnText.textContent = 'message send!';
+        btnText.textContent = 'sending...';
+        submitButton.disabled = true;
+
+        try {
+            const response = await fetch(event.target.action, {
+                method: contactForm.method,
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                btnText.textContent = 'message sent!';
                 contactForm.reset();
                 setTimeout(() => {
                     btnText.textContent = 'send message';
                     submitButton.disabled = false;
-                }, 2500);
-            }, 1500);
-        });
+                }, 3000);
+            } else {
+                btnText.textContent = 'error!';
+                submitButton.style.backgroundColor = '#ff4d4d'; 
+                 setTimeout(() => {
+                    btnText.textContent = 'send message';
+                    submitButton.disabled = false;
+                }, 3000);
+            }
+        } catch (error) {
+            btnText.textContent = 'error!';
+            console.error('Form submission error:', error);
+            setTimeout(() => {
+                btnText.textContent = 'send message';
+                submitButton.disabled = false;
+            }, 3000);
+        }
     }
+
+    contactForm.addEventListener("submit", handleSubmit);
+}
     
-    // --- MÓDULO: UTILITÁRIOS ---
     function initSmoothScroll() {
         document.querySelectorAll('a.smooth-scroll').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -260,7 +271,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- INICIALIZAÇÃO GERAL ---
     function init() {
         initPreloader();
         initNavbar();
