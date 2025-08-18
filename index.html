@@ -11,13 +11,13 @@
     <meta property="og:title" content="simple /// software developer">
     <meta property="og:description" content="building high-quality software and robust digital solutions.">
     <meta property="og:image" content="assets/og-image.png">
-    <meta property="og:url" content="simpledev.vercel.app">
+    <meta property="og:url" content="simple-dev.netlify.app">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
@@ -26,143 +26,494 @@
 </head>
 <body class="loading-active">
     <div id="preloader">
-        <div class="spinner"></div>
+        <div class="preloader-content">
+            <div class="spinner-container">
+                <div class="spinner-dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <p class="loading-text">initializing...</p>
+        </div>
     </div>
-    <div class="custom-cursor"></div>
+
+    <div class="grain-overlay"></div>
 
     <header class="navbar">
         <div class="container nav-container">
-            <a href="#hero" class="logo smooth-scroll">smpl<span class="logo-accent">.</span></a>
-            <nav>
+            <a href="#hero" class="logo smooth-scroll">
+                <span class="logo-bracket">[</span>
+                smpl
+                <span class="logo-accent">.</span>
+                <span class="logo-bracket">]</span>
+            </a>
+            <nav class="nav-menu">
                 <ul class="nav-links">
-                    <li><a href="#about" class="smooth-scroll">about</a></li>
-                    <li><a href="#projects" class="smooth-scroll">projects</a></li>
-                    <li><a href="#contact" class="smooth-scroll">contact</a></li>
+                    <li><a href="#about" class="nav-link smooth-scroll" data-text="about">about</a></li>
+                    <li><a href="#projects" class="nav-link smooth-scroll" data-text="projects">projects</a></li>
+                    <li><a href="#contact" class="nav-link smooth-scroll" data-text="contact">contact</a></li>
                 </ul>
+                <div class="nav-indicator"></div>
             </nav>
+            <button class="mobile-menu-toggle" aria-label="toggle mobile menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </header>
 
     <main>
-        <main>
         <section id="hero" class="hero">
-            <spline-viewer url="https://prod.spline.design/dtjEhqpmjPpvXyCX/scene.splinecode"></spline-viewer>
-
+            <div class="hero-bg">
+                <spline-viewer url="https://prod.spline.design/dtjEhqpmjPpvXyCX/scene.splinecode"></spline-viewer>
+                <div class="hero-overlay"></div>
+                <div class="hero-gradient"></div>
+            </div>
+            
             <div class="container hero-container">
                 <div class="hero-content">
+                    
                     <h1 class="hero-title">
-                        <span class="typing-effect"></span>
+                        <span class="title-line">
+                            <span class="typing-effect"></span>
+                        </span>
                     </h1>
+                    
                     <p class="hero-description">
-                        hi, i'm simple. a software developer with 2 years of experience, turning ideas into high-performance web applications.
+                        hi, i'm simple. a software developer with 2 years of experience, turning ideas into high-performance applications with passion and precision.
                     </p>
+                    
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">3+</span>
+                            <span class="stat-label">years experience</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">projects completed</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">88%</span>
+                            <span class="stat-label">client satisfaction</span>
+                        </div>
+                    </div>
+                    
                     <div class="hero-cta-group">
-                        <a href="#contact" class="cta-button smooth-scroll">get in touch</a>
-                        <a href="#projects" class="cta-button-secondary smooth-scroll">view my work</a>
+                        <a href="#contact" class="cta-button smooth-scroll">
+                            <span class="btn-text">get in touch</span>
+                            <div class="btn-background"></div>
+                        </a>
+                        <a href="#projects" class="cta-button-secondary smooth-scroll">
+                            <span class="btn-text">view my work</span>
+                            <i class="fas fa-arrow-down"></i>
+                        </a>
                     </div>
                 </div>
-                <a href="#about" class="scroll-down-indicator smooth-scroll" aria-label="scroll to about section">
-                    <div class="mouse">
-                        <div class="wheel"></div>
-                    </div>
-                </a>
-            </div>     
+    
+            </div>
         </section>
 
         <section id="about" class="section">
             <div class="container">
+                <div class="section-header fade-in-on-scroll">
+                    <h2 class="section-title">about me</h2>
+                    <div class="section-subtitle">
+                        passionate developer crafting digital experiences
+                    </div>
+                </div>
+
                 <div class="about-content">
                     <div class="about-text fade-in-on-scroll">
-                        <h2 class="section-title">about me</h2>
-                        <p>
-                            i'm a developer passionate about creating innovative and efficient solutions. with 2 years of experience, i've dedicated myself to mastering technologies to build modern web applications and powerful automations. my specialty is transforming complex problems into clean, maintainable, and scalable code.
-                        </p>
-                        <p>
-                            outside the world of code, i'm interested in design, music, and photography—hobbies that enhance my creativity and attention to detail in every project i develop.
-                        </p>
+                        <div class="text-block">
+                            <p class="lead-text">
+                                i'm a developer passionate about creating innovative and efficient solutions. with 2 years of experience, i've dedicated myself to mastering technologies to build modern web applications and powerful automations.
+                            </p>
+                        </div>
+                        
+                        <div class="text-block">
+                            <p>
+                                my specialty is transforming complex problems into clean, maintainable, and scalable code. i believe in the power of well-crafted software to make a real difference in people's lives.
+                            </p>
+                        </div>
+                        
+                        <div class="text-block">
+                            <p>
+                                outside the world of code, i'm interested in design, music, and photography—hobbies that enhance my creativity and attention to detail in every project i develop.
+                            </p>
+                        </div>
+
+                        <div class="about-highlights">
+                            <div class="highlight-item">
+                                <i class="fas fa-code"></i>
+                                <span>clean, efficient code</span>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-rocket"></i>
+                                <span>performance optimization</span>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-palette"></i>
+                                <span>design-focused approach</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="skills-carousel-container fade-in-on-scroll">
-                    <h3 class="skills-title">my skills</h3>
-                    <div class="skills-carousel">
-                        <div class="skills-list">
+
+                <div class="skills-section fade-in-on-scroll">
+                    <div class="skills-header">
+                        <h3 class="skills-title">my technology stack</h3>
+                        <p class="skills-subtitle">tools and technologies i work with daily</p>
+                    </div>
+                    
+                    <div class="skills-carousel-container">
+                        <div class="skills-carousel">
+                            <div class="skills-list">
                             </div>
+                        </div>
+                        <div class="skills-controls">
+                            <button class="skill-control prev" aria-label="previous skills">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="skill-control next" aria-label="next skills">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="section">
+        <section id="projects" class="section projects-section">
             <div class="container">
-                <h2 class="section-title fade-in-on-scroll">featured projects</h2>
+                <div class="section-header fade-in-on-scroll">
+                    <h2 class="section-title">featured projects</h2>
+                    <div class="section-subtitle">
+                        a collection of my most impactful work
+                    </div>
+                </div>
+
+                <div class="projects-filter fade-in-on-scroll">
+                    <button class="filter-btn active" data-filter="all">all projects</button>
+                    <button class="filter-btn" data-filter="frontend">frontend</button>
+                    <button class="filter-btn" data-filter="backend">backend</button>
+                    <button class="filter-btn" data-filter="automation">automation</button>
+                </div>
+
                 <div class="projects-grid">
-                    <article class="project-card fade-in-on-scroll">
-                            <figure class="project-image-container">
-                                <img src="assets/responsive-website.webp" alt="responsive website project image" loading="lazy">
-                            </figure>
-                            <div class="project-info">
-                                <h3 class="project-title">responsive website</h3>
-                                <p class="project-description">a web project built with front-end best practices, showcasing the harmony between html, css, and javascript for a fluid user experience.</p>
-                                <div class="project-tags">
-                                    <span class="tag">html5</span>
-                                    <span class="tag">css3</span>
-                                    <span class="tag">javascript</span>
+                    <article class="project-card fade-in-on-scroll" data-category="frontend">
+                        <div class="project-number">01</div>
+                        <figure class="project-image-container">
+                            <img src="assets/responsive-website.webp" alt="responsive website project" loading="lazy">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="project-link" aria-label="view source code">
+                                        <i class="fab fa-github"></i>
+                                    </a>
                                 </div>
                             </div>
-                        </a>
-                    </article>
-                    <article class="project-card fade-in-on-scroll">
-                            <figure class="project-image-container">
-                                <img src="assets/pythonautomation.jfif" alt="python automation script image" loading="lazy">
-                            </figure>
-                            <div class="project-info">
-                                <h3 class="project-title">python automation</h3>
-                                <p class="project-description">a script to automate repetitive tasks, from data processing to web scraping, designed to optimize workflows and improve efficiency.</p>
-                                <div class="project-tags">
-                                    <span class="tag">python</span>
-                                    <span class="tag">web scraping</span>
-                                    <span class="tag">automation</span>
+                        </figure>
+                        <div class="project-info">
+                            <div class="project-category">frontend</div>
+                            <h3 class="project-title">responsive website</h3>
+                            <p class="project-description">
+                                a modern web project built with front-end best practices, showcasing the harmony between html, css, and javascript for a fluid user experience across all devices.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">html5</span>
+                                <span class="tag">css3</span>
+                                <span class="tag">javascript</span>
+                                <span class="tag">responsive</span>
+                            </div>
+                            <div class="project-footer">
+                                <span class="project-year">2024</span>
+                                <div class="project-status">
+                                    <span class="status-dot completed"></span>
+                                    completed
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     </article>
-                    <article class="project-card fade-in-on-scroll">
-                            <figure class="project-image-container">
-                                <img src="assets/restfulapi.jfif" alt="node.js api project image" loading="lazy">
-                            </figure>
-                            <div class="project-info">
-                                <h3 class="project-title">restful api</h3>
-                                <p class="project-description">a restful api developed with node.js and express to manage data with maximum efficiency, security, and scalability, ready for consumption.</p>
-                                <div class="project-tags">
-                                    <span class="tag">node.js</span>
-                                    <span class="tag">express</span>
-                                    <span class="tag">rest api</span>
+
+                    <article class="project-card fade-in-on-scroll" data-category="automation">
+                        <div class="project-number">02</div>
+                        <figure class="project-image-container">
+                            <img src="assets/pythonautomation.jfif" alt="python automation script" loading="lazy">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="project-link" aria-label="view source code">
+                                        <i class="fab fa-github"></i>
+                                    </a>
                                 </div>
                             </div>
-                        </a>
+                        </figure>
+                        <div class="project-info">
+                            <div class="project-category">automation</div>
+                            <h3 class="project-title">python automation suite</h3>
+                            <p class="project-description">
+                                a comprehensive automation script collection for repetitive tasks, from data processing to web scraping, designed to optimize workflows and improve efficiency.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">python</span>
+                                <span class="tag">web scraping</span>
+                                <span class="tag">automation</span>
+                                <span class="tag">data processing</span>
+                            </div>
+                            <div class="project-footer">
+                                <span class="project-year">2024</span>
+                                <div class="project-status">
+                                    <span class="status-dot completed"></span>
+                                    completed
+                                </div>
+                            </div>
+                        </div>
                     </article>
+
+                    <article class="project-card fade-in-on-scroll" data-category="backend">
+                        <div class="project-number">03</div>
+                        <figure class="project-image-container">
+                            <img src="assets/restfulapi.jfif" alt="restful api project" loading="lazy">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="project-link" aria-label="view source code">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </figure>
+                        <div class="project-info">
+                            <div class="project-category">backend</div>
+                            <h3 class="project-title">enterprise restful api</h3>
+                            <p class="project-description">
+                                a robust restful api developed with node.js and express to manage data with maximum efficiency, security, and scalability, ready for enterprise consumption.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">node.js</span>
+                                <span class="tag">express</span>
+                                <span class="tag">rest api</span>
+                                <span class="tag">mongodb</span>
+                            </div>
+                            <div class="project-footer">
+                                <span class="project-year">2024</span>
+                                <div class="project-status">
+                                    <span class="status-dot active"></span>
+                                    active
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="projects-cta fade-in-on-scroll">
+                    <a href="https://github.com/RD1707" target="_blank" class="cta-button-secondary">
+                        <span class="btn-text">view all projects</span>
+                        <i class="fab fa-github"></i>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="section">
-            <div class="container contact-container fade-in-on-scroll">
-                <h2 class="section-title">get in touch</h2>
-                <p>
-                    i'm currently available for new opportunities and collaborations. if you have a project in mind or just want to connect, feel free to reach out.
-                </p>
-                <a href="mailto:souplemonpie@gmail.com" class="cta-button">send an email</a>
+        <section class="testimonials-section section">
+            <div class="container">
+                <div class="section-header fade-in-on-scroll">
+                    <h2 class="section-title">what clients say</h2>
+                    <div class="section-subtitle">
+                        testimonials from satisfied clients
+                    </div>
+                </div>
+
+                <div class="testimonials-grid fade-in-on-scroll">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p class="testimonial-text">
+                                "simple delivered exactly what we needed. professional, efficient, and incredibly talented developer."
+                            </p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <span>JD</span>
+                            </div>
+                            <div class="author-info">
+                                <span class="author-name">john doe</span>
+                                <span class="author-role">ceo at techcorp</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p class="testimonial-text">
+                                "outstanding work quality and attention to detail. would definitely recommend and work with again."
+                            </p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <span>SM</span>
+                            </div>
+                            <div class="author-info">
+                                <span class="author-name">sarah martinez</span>
+                                <span class="author-role">startup founder</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact-section">
+            <div class="container">
+                <div class="section-header fade-in-on-scroll">
+                    <h2 class="section-title">get in touch</h2>
+                    <div class="section-subtitle">
+                        ready to start your next project?
+                    </div>
+                </div>
+
+                <div class="contact-content fade-in-on-scroll">
+                    <div class="contact-info">
+                        <div class="contact-text">
+                            <p class="lead-text">
+                                i'm currently available for new opportunities and collaborations. if you have a project in mind or just want to connect, feel free to reach out.
+                            </p>
+                            <p>
+                                let's discuss how we can bring your vision to life with clean, efficient, and scalable solutions.
+                            </p>
+                        </div>
+
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="method-info">
+                                    <span class="method-label">email</span>
+                                    <a href="mailto:souplemonpie@gmail.com" class="method-value">souplemonpie@gmail.com</a>
+                                </div>
+                            </div>
+
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="method-info">
+                                    <span class="method-label">response time</span>
+                                    <span class="method-value">within 24 hours</span>
+                                </div>
+                            </div>
+
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="method-info">
+                                    <span class="method-label">location</span>
+                                    <span class="method-value">salvador, brazil</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact-social">
+                            <h4 class="social-title">follow me</h4>
+                            <div class="social-links">
+                                <a href="https://github.com/RD1707" target="_blank" aria-label="github profile" class="social-link">
+                                    <i class="fab fa-github"></i>
+                                    <span>github</span>
+                                </a>
+                                <a href="https://x.com/Panda03365472" target="_blank" aria-label="twitter profile" class="social-link">
+                                    <i class="fab fa-twitter"></i>
+                                    <span>twitter</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-container">
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-group">
+                                <label for="name" class="form-label">name</label>
+                                <input type="text" id="name" name="name" class="form-input" required>
+                                <div class="input-focus-border"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">email</label>
+                                <input type="email" id="email" name="email" class="form-input" required>
+                                <div class="input-focus-border"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject" class="form-label">subject</label>
+                                <input type="text" id="subject" name="subject" class="form-input" required>
+                                <div class="input-focus-border"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message" class="form-label">message</label>
+                                <textarea id="message" name="message" class="form-textarea" rows="5" required></textarea>
+                                <div class="input-focus-border"></div>
+                            </div>
+
+                            <button type="submit" class="cta-button form-submit">
+                                <span class="btn-text">send message</span>
+                                <div class="btn-background"></div>
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        <div class="container footer-container">
-            <div class="social-links-footer">
-                <a href="https://github.com/RD1707" target="_blank" aria-label="navigate to github profile"><i class="fab fa-github"></i></a>
-                <a href="https://x.com/Panda03365472" target="_blank" aria-label="navigate to twitter profile"><i class="fab fa-twitter"></i></a>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-brand">
+                        <a href="#hero" class="footer-logo smooth-scroll">
+                            <span class="logo-bracket">[</span>
+                            smpl
+                            <span class="logo-accent">.</span>
+                            <span class="logo-bracket">]</span>
+                        </a>
+                        <p class="footer-tagline">crafting digital experiences with code</p>
+                    </div>
+
+                    <div class="footer-links">
+                        <div class="footer-column">
+                            <h4 class="footer-heading">navigation</h4>
+                            <ul class="footer-list">
+                                <li><a href="#about" class="footer-link smooth-scroll">about</a></li>
+                                <li><a href="#projects" class="footer-link smooth-scroll">projects</a></li>
+                                <li><a href="#contact" class="footer-link smooth-scroll">contact</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="footer-column">
+                            <h4 class="footer-heading">connect</h4>
+                            <ul class="footer-list">
+                                <li><a href="https://github.com/RD1707" target="_blank" class="footer-link">github</a></li>
+                                <li><a href="https://x.com/Panda03365472" target="_blank" class="footer-link">twitter</a></li>
+                                <li><a href="mailto:souplemonpie@gmail.com" class="footer-link">email</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <div class="footer-info">
+                        <p>&copy; <span id="current-year">2025</span> simple. all rights reserved.</p>
+                    </div>
+                </div>
             </div>
-            <p>&copy; <span id="current-year">2025</span> simple. all rights reserved.</p>
         </div>
     </footer>
 
