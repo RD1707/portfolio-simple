@@ -1668,6 +1668,10 @@ input, textarea, select {
         /* Garante que a tipografia base seja legível em telas menores */
         font-size: 15px;
     }
+
+    .hero {
+        padding-top: 100px;
+    }
     
     .container {
         padding: 0 var(--spacing-lg);
