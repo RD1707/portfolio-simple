@@ -6,21 +6,28 @@
     <title>simple /// software developer</title>
 
     <meta name="description" content="portfolio of simple, a software developer focused on building efficient and scalable web applications.">
-    <meta name="keywords" content="developer, software engineer, front-end, back-end, python, javascript, node.js, react, portfolio, freelancer">
+    <meta name="keywords" content="developer, software engineer, front-end, back-end, python, javascript, node.js, react, portfolio, freelancer, brazil">
     <meta name="author" content="simple">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="simple-dev.netlify.app">
     <meta property="og:title" content="simple /// software developer">
     <meta property="og:description" content="building high-quality software and robust digital solutions.">
     <meta property="og:image" content="assets/og-image.png">
-    <meta property="og:url" content="simple-dev.netlify.app">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="simple-dev.netlify.app">
+    <meta property="twitter:title" content="simple /// software developer">
+    <meta property="twitter:description" content="building high-quality software and robust digital solutions.">
+    <meta property="twitter:image" content="assets/og-image.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 </head>
@@ -28,11 +35,9 @@
     <div id="preloader">
         <div class="preloader-content">
             <div class="spinner-container">
-                <div class="spinner-dots">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                </div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
             </div>
             <p class="loading-text">initializing...</p>
         </div>
@@ -43,10 +48,7 @@
     <header class="navbar">
         <div class="container nav-container">
             <a href="#hero" class="logo smooth-scroll">
-                <span class="logo-bracket">[</span>
-                smpl
-                <span class="logo-accent">.</span>
-                <span class="logo-bracket">]</span>
+                <span class="logo-bracket">[</span>smpl<span class="logo-accent">.</span><span class="logo-bracket">]</span>
             </a>
             <nav class="nav-menu">
                 <ul class="nav-links">
@@ -54,27 +56,30 @@
                     <li><a href="#projects" class="nav-link smooth-scroll" data-text="projects">projects</a></li>
                     <li><a href="#contact" class="nav-link smooth-scroll" data-text="contact">contact</a></li>
                 </ul>
-                <div class="nav-indicator"></div>
             </nav>
-            <button class="mobile-menu-toggle" aria-label="toggle mobile menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="theme-toggle" aria-label="toggle theme">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <button class="mobile-menu-toggle" aria-label="toggle mobile menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
     </header>
 
     <main>
         <section id="hero" class="hero">
             <div class="hero-bg">
-                <spline-viewer url="https://prod.spline.design/dtjEhqpmjPpvXyCX/scene.splinecode"></spline-viewer>
+                <div class="static-hero-bg"></div>
+                <spline-viewer url=""></spline-viewer>
                 <div class="hero-overlay"></div>
-                <div class="hero-gradient"></div>
             </div>
             
             <div class="container hero-container">
                 <div class="hero-content">
-                    
                     <h1 class="hero-title">
                         <span class="title-line">
                             <span class="typing-effect"></span>
@@ -82,29 +87,19 @@
                     </h1>
                     
                     <p class="hero-description">
-                        hi, i'm simple. a software developer with 3+ years of experience, turning ideas into high-performance applications with precision.
+                        hello, i'm simple. a software developer with 3+ years of experience, turning ideas into high-performance applications with precision.
                     </p>
-                    
-                    <div class="hero-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">3+</span>
-                            <span class="stat-label">years experience</span>
-                        </div>
-                        <div class="stat-divider"></div>
-                        <div class="stat-item">
-                            <span class="stat-number">50+</span>
-                            <span class="stat-label">projects completed</span>
-                        </div>
-                        <div class="stat-divider"></div>
-                        <div class="stat-item">
-                            <span class="stat-number">88%</span>
-                            <span class="stat-label">client satisfaction</span>
-                        </div>
-                    </div>
-                    
 
+                    <div class="hero-cta-group">
+                        <a href="#projects" class="cta-button smooth-scroll">
+                            <span class="btn-text">view projects</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#contact" class="cta-button-secondary smooth-scroll">
+                            <span class="btn-text">get in touch</span>
+                        </a>
+                    </div>
                 </div>
-    
             </div>
         </section>
 
@@ -112,59 +107,86 @@
             <div class="container">
                 <div class="section-header fade-in-on-scroll">
                     <h2 class="section-title">about me</h2>
-                    <div class="section-subtitle">
-                        simple developer crafting digital experiences
-                    </div>
+                    <p class="section-subtitle">
+                        a developer dedicated to creating memorable digital experiences.
+                    </p>
                 </div>
 
                 <div class="about-content">
                     <div class="about-text fade-in-on-scroll">
-                        <div class="text-block">
-                            <p class="lead-text">
-                                i'm a developer passionate about creating innovative and efficient solutions. with 3+ years of experience, i've dedicated myself to mastering technologies to build modern web applications and powerful automations.
-                            </p>
-                        </div>
-                        
-                        <div class="text-block">
-                            <p>
-                                my specialty is transforming complex problems into clean, maintainable, and scalable code. i believe in the power of well-crafted software to make a real difference in people's lives.
-                            </p>
-                        </div>
-                        
-                        <div class="text-block">
-                            <p>
-                                outside the world of code, i'm interested in design, music, and photography—hobbies that enhance my creativity and attention to detail in every project i develop.
-                            </p>
-                        </div>
+                        <p class="lead-text">
+                            i am passionate about creating innovative and efficient solutions. with over 3 years of experience, i have dedicated myself to mastering technologies to build modern web applications and powerful automations.
+                            <br> <br> my specialty is transforming complex problems into clean, maintainable, and scalable code. i believe in the power of well-built software to make a difference in people's lives.
+                            <br> <br> outside the world of code, i am interested in design, music, and photography—hobbies that enhance my creativity and attention to detail in every project i develop.
+                        </p>
+                    </div>
 
-                        <div class="about-highlights">
-                            <div class="highlight-item">
-                                <i class="fas fa-code"></i>
-                                <span>clean, efficient code</span>
-                            </div>
-                            <div class="highlight-item">
-                                <i class="fas fa-rocket"></i>
-                                <span>performance optimization</span>
-                            </div>
-                            <div class="highlight-item">
-                                <i class="fas fa-palette"></i>
-                                <span>design-focused approach</span>
-                            </div>
+                    <div class="about-highlights fade-in-on-scroll">
+                        <div class="highlight-item">
+                            <i class="fas fa-code"></i>
+                            <span>clean and efficient code</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-rocket"></i>
+                            <span>performance optimization</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-palette"></i>
+                            <span>design-focused approach</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="skills-section fade-in-on-scroll">
-                    <div class="skills-header">
-                        <h3 class="skills-title">my skils</h3>
-                        <p class="skills-subtitle">tools and technologies i work with daily</p>
-                    </div>
-                    
-                    <div class="skills-carousel-container">
-                        <div class="skills-carousel">
-                            <div class="skills-list">
+                <div class="timeline-section fade-in-on-scroll">
+                    <h3 class="subsection-title">my journey</h3>
+                    <ul class="timeline">
+                        <li class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4 class="timeline-title">start of studies</h4>
+                                <p class="timeline-description">i began exploring the world of programming, focusing on logic and algorithms.</p>
+                                <span class="timeline-date">2021</span>
                             </div>
-                        </div>
+                        </li>
+                        <li class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4 class="timeline-title">first freelance project</h4>
+                                <p class="timeline-description">i developed an automation system for a small business, optimizing its workflow.</p>
+                                <span class="timeline-date">2022</span>
+                            </div>
+                        </li>
+                        <li class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4 class="timeline-title">focus on web development</h4>
+                                <p class="timeline-description">i deepened my knowledge in javascript, react, and node.js to create complete applications.</p>
+                                <span class="timeline-date">2023</span>
+                            </div>
+                        </li>
+                         <li class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4 class="timeline-title">backend specialization</h4>
+                                <p class="timeline-description">i explored microservices architectures and database optimization for scalable systems.</p>
+                                <span class="timeline-date">2024</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section skills-section">
+            <div class="container">
+                <div class="section-header fade-in-on-scroll">
+                    <h2 class="section-title">skills</h2>
+                    <p class="section-subtitle">tools and technologies i work with daily.</p>
+                </div>
+                
+                <div class="skills-carousel-container fade-in-on-scroll">
+                    <div class="skills-carousel">
+                        <div class="skills-list"></div>
                     </div>
                 </div>
             </div>
@@ -174,49 +196,18 @@
             <div class="container">
                 <div class="section-header fade-in-on-scroll">
                     <h2 class="section-title">featured projects</h2>
-                    <div class="section-subtitle">
-                        a collection of my most impactful work
-                    </div>
+                    <p class="section-subtitle">a collection of my most impactful works.</p>
                 </div>
 
                 <div class="projects-filter fade-in-on-scroll">
-                    <button class="filter-btn active" data-filter="all">all projects</button>
+                    <button class="filter-btn active" data-filter="all">all</button>
                     <button class="filter-btn" data-filter="frontend">frontend</button>
                     <button class="filter-btn" data-filter="backend">backend</button>
-                    <button class="filter-btn" data-filter="database">database</button>
+                    <button class="filter-btn" data-filter="fullstack">fullstack</button>
                     <button class="filter-btn" data-filter="roblox">roblox</button>
                 </div>
 
                 <div class="projects-grid">
-
-                    <article class="project-card fade-in-on-scroll" data-category="database">
-                        <figure class="project-image-container">
-                            <img src="assets/library-database.png" alt="library database project" loading="lazy">
-                            <div class="project-overlay">
-                            </div>
-                        </figure>
-                        <div class="project-info">
-                            <div class="project-category">database</div>
-                            <h3 class="project-title">library management system</h3>
-                            <p class="project-description">
-                                a relational database built with postgresql to manage books, authors, publishers, users, and loans, including triggers, views, and advanced queries for overdue items and most read authors.
-                            </p>
-                            <div class="project-tags">
-                                <span class="tag">postgresql</span>
-                                <span class="tag">sql</span>
-                                <span class="tag">triggers</span>
-                                <span class="tag">views</span>
-                            </div>
-                            <div class="project-footer">
-                                <span class="project-year">2024</span>
-                                <div class="project-status">
-                                    <span class="status-dot completed"></span>
-                                    completed
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
                     <article class="project-card fade-in-on-scroll" data-category="backend">
                         <figure class="project-image-container">
                             <img src="assets/quiz-app.png" alt="quiz project" loading="lazy">
@@ -620,115 +611,54 @@
                             </div>
                         </div>
                     </article>
-                    
                 </div>
                 
-                <div class="section-header fade-in-on-scroll" style="margin-top: 6rem; margin-bottom: 4rem;">
-                    <h2 class="section-title">and many more...</h2>
-                    <div class="section-subtitle">
-                        this is just a glimpse of my work. for a complete list of my projects, please visit my github profile.
-                    </div>
-                </div>
-
                 <div class="projects-cta fade-in-on-scroll">
                     <a href="https://github.com/RD1707" target="_blank" class="cta-button-secondary">
-                        <span class="btn-text">view all projects</span>
+                        <span class="btn-text">see all projects on github</span>
                         <i class="fab fa-github"></i>
                     </a>
                 </div>
             </div>
         </section>
 
-        <section class="testimonials-section section">
+        <section id="testimonials" class="section testimonials-section">
             <div class="container">
                 <div class="section-header fade-in-on-scroll">
                     <h2 class="section-title">what clients say</h2>
-                    <div class="section-subtitle">
-                        testimonials from satisfied clients
-                    </div>
+                    <p class="section-subtitle">feedback from people i've collaborated with.</p>
                 </div>
 
                 <div class="testimonials-grid fade-in-on-scroll">
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <div class="quote-icon">
-                                <i class="fas fa-quote-left"></i>
-                            </div>
-                            <p class="testimonial-text">
-                                "simple delivered exactly what we needed. professional, efficient, and incredibly talented developer."
-                            </p>
+                    <article class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">
-                                <span>JD</span>
-                            </div>
+                        <p class="testimonial-text">
+                            "simple delivered exactly what we needed. a professional, efficient, and incredibly talented developer."
+                        </p>
+                        <footer class="testimonial-author">
                             <div class="author-info">
-                                <span class="author-name">john doe</span>
-                                <span class="author-role">dev</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <div class="quote-icon">
-                                <i class="fas fa-quote-left"></i>
-                            </div>
-                            <p class="testimonial-text">
-                                "outstanding work quality and attention to detail. would definitely recommend and work with again."
-                            </p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">
-                                <span>SM</span>
-                            </div>
-                            <div class="author-info">
-                                <span class="author-name">sarah martinez</span>
+                                <h4 class="author-name">sarah martinez</h4>
                                 <span class="author-role">startup founder</span>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <div class="quote-icon">
-                                <i class="fas fa-quote-left"></i>
-                            </div>
-                            <p class="testimonial-text">
-                                "the communication was seamless and the final product exceeded all our expectations. a true problem solver."
-                            </p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">
-                                <span>AL</span>
-                            </div>
-                            <div class="author-info">
-                                <span class="author-name">alex lee</span>
-                                <span class="author-role">roblox project mananger</span>
-                            </div>
-                        </div>
-                    </div>
+                        </footer>
+                    </article>
 
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <div class="quote-icon">
-                                <i class="fas fa-quote-left"></i>
-                            </div>
-                            <p class="testimonial-text">
-                                "transformed our concept into a fully functional and beautiful application. the level of creativity is impressive."
-                            </p>
+                    <article class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">
-                                <span>EC</span>
-                            </div>
+                        <p class="testimonial-text">
+                            "the communication was transparent, and the final product exceeded all our expectations. a true problem-solver."
+                        </p>
+                         <footer class="testimonial-author">
                             <div class="author-info">
-                                <span class="author-name">emily carter</span>
-                                <span class="author-role">designer</span>
+                                <h4 class="author-name">alex lee</h4>
+                                <span class="author-role">project manager, roblox</span>
                             </div>
-                        </div>
-                    </div>
-
+                        </footer>
+                    </article>
                 </div>
             </div>
         </section>
@@ -737,69 +667,31 @@
             <div class="container">
                 <div class="section-header fade-in-on-scroll">
                     <h2 class="section-title">get in touch</h2>
-                    <div class="section-subtitle">
-                        ready to start your next project?
-                    </div>
+                    <p class="section-subtitle">ready to start your next project?</p>
                 </div>
 
                 <div class="contact-content fade-in-on-scroll">
                     <div class="contact-info">
-                        <div class="contact-text">
-                            <p class="lead-text">
-                                i'm currently available for new opportunities and collaborations. if you have a project in mind or just want to connect, feel free to reach out.
-                            </p>
-                            <p>
-                                let's discuss how we can bring your vision to life with clean, efficient, and scalable solutions.
-                            </p>
-                        </div>
-
+                        <p class="lead-text">
+                            i am available for new opportunities and collaborations. if you have a project in mind or just want to connect, feel free to reach out.
+                        </p>
+                        
                         <div class="contact-methods">
-                            <div class="contact-method">
-                                <div class="method-icon">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
+                            <a href="mailto:souplemonpie@gmail.com" class="contact-method">
+                                <i class="fas fa-envelope method-icon"></i>
                                 <div class="method-info">
                                     <span class="method-label">email</span>
-                                    <a href="mailto:souplemonpie@gmail.com" class="method-value">souplemonpie@gmail.com</a>
+                                    <span class="method-value">souplemonpie@gmail.com</span>
                                 </div>
-                            </div>
-
-                            <div class="contact-method">
-                                <div class="method-icon">
-                                    <i class="fas fa-clock"></i>
-                                </div>
-                                <div class="method-info">
-                                    <span class="method-label">response time</span>
-                                    <span class="method-value">within 24 hours</span>
-                                </div>
-                            </div>
-
-                            <div class="contact-method">
-                                <div class="method-icon">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div class="method-info">
-                                    <span class="method-label">location</span>
-                                    <span class="method-value">salvador, brazil</span>
-                                </div>
-                            </div>
+                            </a>
                         </div>
 
                         <div class="contact-social">
                             <h4 class="social-title">follow me</h4>
                             <div class="social-links">
-                                <a href="https://github.com/RD1707" target="_blank" aria-label="github profile" class="social-link">
-                                    <i class="fab fa-github"></i>
-                                    <span>github</span>
-                                </a>
-                                <a href="https://x.com/Panda03365472" target="_blank" aria-label="twitter profile" class="social-link">
-                                    <i class="fab fa-twitter"></i>
-                                    <span>twitter</span>
-                                </a>
-                                <a href="http://discord.com/users/s1mple17.__" target="_blank" aria-label="discord profile" class="social-link">
-                                    <i class="fab fa-discord"></i>
-                                    <span>discord</span>
-                                </a>
+                                <a href="https://github.com/RD1707" target="_blank" aria-label="github profile" class="social-link"><i class="fab fa-github"></i></a>
+                                <a href="https://linkedin.com/in/SEU-PERFIL" target="_blank" aria-label="linkedin profile" class="social-link"><i class="fab fa-linkedin"></i></a>
+                                <a href="http://discord.com/users/s1mple17.__" target="_blank" aria-label="discord profile" class="social-link"><i class="fab fa-discord"></i></a>
                             </div>
                         </div>
                     </div>
@@ -809,30 +701,17 @@
                             <div class="form-group">
                                 <label for="name" class="form-label">name</label>
                                 <input type="text" id="name" name="name" class="form-input" required>
-                                <div class="input-focus-border"></div>
                             </div>
-
                             <div class="form-group">
                                 <label for="email" class="form-label">email</label>
                                 <input type="email" id="email" name="email" class="form-input" required>
-                                <div class="input-focus-border"></div>
                             </div>
-
-                            <div class="form-group">
-                                <label for="subject" class="form-label">subject</label>
-                                <input type="text" id="subject" name="subject" class="form-input" required>
-                                <div class="input-focus-border"></div>
-                            </div>
-
                             <div class="form-group">
                                 <label for="message" class="form-label">message</label>
                                 <textarea id="message" name="message" class="form-textarea" rows="5" required></textarea>
-                                <div class="input-focus-border"></div>
                             </div>
-
                             <button type="submit" class="cta-button form-submit">
                                 <span class="btn-text">send message</span>
-                                <div class="btn-background"></div>
                             </button>
                         </form>
                     </div>
@@ -847,12 +726,13 @@
                 <div class="footer-main">
                     <div class="footer-brand">
                         <a href="#hero" class="footer-logo smooth-scroll">
-                            <span class="logo-bracket">[</span>
-                            smpl
-                            <span class="logo-accent">.</span>
-                            <span class="logo-bracket">]</span>
+                            <span class="logo-bracket">[</span>smpl<span class="logo-accent">.</span><span class="logo-bracket">]</span>
                         </a>
-                        <p class="footer-tagline">crafting digital experiences with code</p>
+                        <p class="footer-tagline">creating digital experiences with code.</p>
+                        <div class="footer-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>salvador, brazil</span>
+                        </div>
                     </div>
 
                     <div class="footer-links">
@@ -864,12 +744,11 @@
                                 <li><a href="#contact" class="footer-link smooth-scroll">contact</a></li>
                             </ul>
                         </div>
-
                         <div class="footer-column">
                             <h4 class="footer-heading">connect</h4>
                             <ul class="footer-list">
                                 <li><a href="https://github.com/RD1707" target="_blank" class="footer-link">github</a></li>
-                                <li><a href="https://x.com/Panda03365472" target="_blank" class="footer-link">twitter</a></li>
+                                <li><a href="https://linkedin.com/in/SEU-PERFIL" target="_blank" class="footer-link">linkedin</a></li>
                                 <li><a href="http://discord.com/users/s1mple17.__" target="_blank" class="footer-link">discord</a></li>
                                 <li><a href="mailto:souplemonpie@gmail.com" class="footer-link">email</a></li>
                             </ul>
@@ -878,9 +757,7 @@
                 </div>
 
                 <div class="footer-bottom">
-                    <div class="footer-info">
-                        <p>&copy; <span id="current-year">2023</span> simple. all rights reserved.</p>
-                    </div>
+                    <p>&copy; <span id="current-year">2025</span> simple. all rights reserved.</p>
                 </div>
             </div>
         </div>

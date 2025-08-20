@@ -1,39 +1,184 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- Seletores de Elementos DOM ---
     const body = document.body;
     const preloader = document.getElementById('preloader');
     const splineViewer = document.querySelector('spline-viewer');
     const navbar = document.querySelector('.navbar');
     const navMenu = document.querySelector('.nav-menu');
-    const navLinksContainer = document.querySelector('.nav-links');
-    const navLinks = document.querySelectorAll('.nav-link');
-    const navIndicator = document.querySelector('.nav-indicator');
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelectorAll('.nav-link');
     const typingElement = document.querySelector('.typing-effect');
-    const customCursor = document.querySelector('.custom-cursor');
     const skillsList = document.querySelector('.skills-list');
-    const skillsCarousel = document.querySelector('.skills-carousel');
-    const skillControls = document.querySelector('.skills-controls');
+    const projectsContainer = document.querySelector('#projects');
     const projectsFilter = document.querySelector('.projects-filter');
     const projectCards = document.querySelectorAll('.project-card');
+    const projectTags = document.querySelectorAll('.project-tags .tag');
     const contactForm = document.getElementById('contactForm');
     const yearSpan = document.getElementById('current-year');
+    const themeToggleButton = document.getElementById('theme-toggle');
+    const langSwitcher = document.querySelector('.lang-switcher');
 
-    // --- DADOS ---
+    let typedInstance = null; // Guarda a instância do Typed.js
+
     const skills = [
-        { name: 'html5', iconClass: 'devicon-html5-plain' },
-        { name: 'css3', iconClass: 'devicon-css3-plain' },
-        { name: 'javascript', iconClass: 'devicon-javascript-plain' },
-        { name: 'python', iconClass: 'devicon-python-plain' },
-        { name: 'node.js', iconClass: 'devicon-nodejs-plain' },
-        { name: 'lua', iconClass: 'devicon-lua-plain' },
-        { name: 'react', iconClass: 'devicon-react-original' },
-        { name: 'vue.js', iconClass: 'devicon-vuejs-plain' },
-        { name: 'postgresql', iconClass: 'devicon-postgresql-plain' },
-        { name: 'git', iconClass: 'devicon-git-plain' },
-        { name: 'php', iconClass: 'devicon-php-plain' },
-        { name: 'c++', iconClass: 'devicon-cplusplus-plain' }
+        { name: 'html5', iconClass: 'devicon-html5-plain', tooltip: '3+ anos de experiência' },
+        { name: 'css3', iconClass: 'devicon-css3-plain', tooltip: '3+ anos de experiência' },
+        { name: 'javascript', iconClass: 'devicon-javascript-plain', tooltip: '3+ anos de experiência' },
+        { name: 'python', iconClass: 'devicon-python-plain', tooltip: '2+ anos de experiência' },
+        { name: 'node.js', iconClass: 'devicon-nodejs-plain', tooltip: '2 anos de experiência' },
+        { name: 'lua', iconClass: 'devicon-lua-plain', tooltip: '1+ ano de experiência' },
+        { name: 'react', iconClass: 'devicon-react-original', tooltip: '2 anos de experiência' },
+        { name: 'vue.js', iconClass: 'devicon-vuejs-plain', tooltip: '1 ano de experiência' },
+        { name: 'postgresql', iconClass: 'devicon-postgresql-plain', tooltip: '2+ anos de experiência' },
+        { name: 'git', iconClass: 'devicon-git-plain', tooltip: '3+ anos de experiência' },
+        { name: 'php', iconClass: 'devicon-php-plain', tooltip: '1 ano de experiência' },
+        { name: 'c++', iconClass: 'devicon-cplusplus-plain', tooltip: '1 ano de experiência' }
     ];
+
+    // --- Dicionário de Traduções Completo ---
+    const translations = {
+        'pt-BR': {
+            typingStrings: ['desenvolvedor de software.', 'especialista front-end.', 'engenheiro back-end.', 'freelancer.', 'solucionador de problemas.'],
+            navAbout: 'sobre',
+            navProjects: 'projetos',
+            navContact: 'contato',
+            heroDescription: 'olá, sou o simple. um desenvolvedor de software com 3+ anos de experiência, transformando ideias em aplicações de alta performance com precisão.',
+            heroBtnProjects: 'ver projetos',
+            heroBtnContact: 'entrar em contato',
+            aboutTitle: 'sobre mim',
+            aboutSubtitle: 'Um desenvolvedor dedicado a criar experiências digitais memoráveis.',
+            aboutLeadText: 'Sou apaixonado por criar soluções inovadoras e eficientes. Com mais de 3 anos de experiência, tenho me dedicado a dominar tecnologias para construir aplicações web modernas e automações poderosas.',
+            aboutParagraph1: 'Minha especialidade é transformar problemas complexos em código limpo, manutenível e escalável. Acredito no poder de um software bem construído para fazer a diferença na vida das pessoas.',
+            aboutParagraph2: 'Fora do mundo do código, tenho interesse em design, música e fotografia — hobbies que aprimoram minha criatividade e atenção aos detalhes em cada projeto que desenvolvo.',
+            highlight1: 'Código limpo e eficiente',
+            highlight2: 'Otimização de performance',
+            highlight3: 'Abordagem focada no design',
+            timelineTitle: 'minha jornada',
+            timeline1Title: 'Início dos Estudos',
+            timeline1Desc: 'Comecei a explorar o mundo da programação, focando em lógica e algoritmos.',
+            timeline2Title: 'Primeiro Projeto Freelance',
+            timeline2Desc: 'Desenvolvi um sistema de automação para um pequeno negócio, otimizando seu fluxo de trabalho.',
+            timeline3Title: 'Foco em Desenvolvimento Web',
+            timeline3Desc: 'Aprofundei meus conhecimentos em JavaScript, React e Node.js para criar aplicações completas.',
+            timeline4Title: 'Especialização em Backend',
+            timeline4Desc: 'Explorei arquiteturas de microsserviços e otimização de bancos de dados para sistemas escaláveis.',
+            skillsTitle: 'habilidades',
+            skillsSubtitle: 'Ferramentas e tecnologias com as quais trabalho diariamente.',
+            projectsTitle: 'projetos em destaque',
+            projectsSubtitle: 'Uma coleção dos meus trabalhos mais impactantes.',
+            filterAll: 'todos',
+            filterFrontend: 'frontend',
+            filterBackend: 'backend',
+            filterFullstack: 'fullstack',
+            filterRoblox: 'roblox',
+            project1Category: 'Backend / Banco de Dados',
+            project1Title: 'Sistema de Gerenciamento de Biblioteca',
+            project1Desc: 'Banco de dados relacional com PostgreSQL para gerenciar livros, autores e empréstimos, com triggers e views para relatórios avançados.',
+            statusCompleted: 'concluído',
+            project2Category: 'Fullstack',
+            project2Title: 'Gerenciador de Tarefas Colaborativo',
+            project2Desc: 'Aplicação web com React e Node.js que permite a criação e gerenciamento de tarefas em tempo real para equipes.',
+            statusInProgress: 'em desenvolvimento',
+            project3Category: 'Frontend / Freelance',
+            project3Title: 'Landing Page para E-commerce',
+            project3Desc: 'Interface de usuário moderna e responsiva para uma loja virtual, focada na experiência do usuário e otimização de conversão.',
+            statusRealClient: 'cliente real',
+            projectsBtnGithub: 'ver todos os projetos no github',
+            testimonialsTitle: 'o que dizem os clientes',
+            testimonialsSubtitle: 'Feedback de pessoas com quem já colaborei.',
+            testimonial1Text: '"O Simple entregou exatamente o que precisávamos. Um desenvolvedor profissional, eficiente e incrivelmente talentoso."',
+            testimonial1Author: 'Sarah Martinez',
+            testimonial1Role: 'Fundadora de Startup',
+            testimonial2Text: '"A comunicação foi transparente e o produto final excedeu todas as nossas expectativas. Um verdadeiro solucionador de problemas."',
+            testimonial2Author: 'Alex Lee',
+            testimonial2Role: 'Gerente de Projetos, Roblox',
+            contactTitle: 'entre em contato',
+            contactSubtitle: 'Pronto para começar seu próximo projeto?',
+            contactLeadText: 'Estou disponível para novas oportunidades e colaborações. Se você tem um projeto em mente ou apenas quer se conectar, sinta-se à vontade para me procurar.',
+            contactEmailLabel: 'email',
+            contactFollowMe: 'siga-me',
+            formNameLabel: 'nome',
+            formEmailLabel: 'email',
+            formMessageLabel: 'mensagem',
+            formSubmitBtn: 'enviar mensagem',
+            footerTagline: 'Criando experiências digitais com código.',
+            footerLocation: 'Salvador, Brasil',
+            footerNavHeading: 'navegação',
+            footerConnectHeading: 'conecte-se',
+            footerCopyright: 'simple. todos os direitos reservados.',
+        },
+        'en': {
+            typingStrings: ['software developer.', 'front-end specialist.', 'back-end engineer.', 'freelancer.', 'problem solver.'],
+            navAbout: 'about',
+            navProjects: 'projects',
+            navContact: 'contact',
+            heroDescription: 'hello, i\'m simple. a software developer with 3+ years of experience, turning ideas into high-performance applications with precision.',
+            heroBtnProjects: 'view projects',
+            heroBtnContact: 'get in touch',
+            aboutTitle: 'about me',
+            aboutSubtitle: 'A developer dedicated to creating memorable digital experiences.',
+            aboutLeadText: 'I am passionate about creating innovative and efficient solutions. With over 3 years of experience, I have dedicated myself to mastering technologies to build modern web applications and powerful automations.',
+            aboutParagraph1: 'My specialty is transforming complex problems into clean, maintainable, and scalable code. I believe in the power of well-built software to make a difference in people\'s lives.',
+            aboutParagraph2: 'Outside the world of code, I am interested in design, music, and photography—hobbies that enhance my creativity and attention to detail in every project I develop.',
+            highlight1: 'Clean and efficient code',
+            highlight2: 'Performance optimization',
+            highlight3: 'Design-focused approach',
+            timelineTitle: 'my journey',
+            timeline1Title: 'Start of Studies',
+            timeline1Desc: 'I began exploring the world of programming, focusing on logic and algorithms.',
+            timeline2Title: 'First Freelance Project',
+            timeline2Desc: 'I developed an automation system for a small business, optimizing its workflow.',
+            timeline3Title: 'Focus on Web Development',
+            timeline3Desc: 'I deepened my knowledge in JavaScript, React, and Node.js to create complete applications.',
+            timeline4Title: 'Backend Specialization',
+            timeline4Desc: 'I explored microservices architectures and database optimization for scalable systems.',
+            skillsTitle: 'skills',
+            skillsSubtitle: 'Tools and technologies I work with daily.',
+            projectsTitle: 'featured projects',
+            projectsSubtitle: 'A collection of my most impactful works.',
+            filterAll: 'all',
+            filterFrontend: 'frontend',
+            filterBackend: 'backend',
+            filterFullstack: 'fullstack',
+            filterRoblox: 'roblox',
+            project1Category: 'Backend / Database',
+            project1Title: 'Library Management System',
+            project1Desc: 'Relational database with PostgreSQL to manage books, authors, and loans, with triggers and views for advanced reporting.',
+            statusCompleted: 'completed',
+            project2Category: 'Fullstack',
+            project2Title: 'Collaborative Task Manager',
+            project2Desc: 'Web application with React and Node.js that allows for the creation and management of tasks in real-time for teams.',
+            statusInProgress: 'in development',
+            project3Category: 'Frontend / Freelance',
+            project3Title: 'E-commerce Landing Page',
+            project3Desc: 'Modern and responsive user interface for an online store, focused on user experience and conversion optimization.',
+            statusRealClient: 'real client',
+            projectsBtnGithub: 'see all projects on github',
+            testimonialsTitle: 'what clients say',
+            testimonialsSubtitle: 'Feedback from people I\'ve collaborated with.',
+            testimonial1Text: '"Simple delivered exactly what we needed. A professional, efficient, and incredibly talented developer."',
+            testimonial1Author: 'Sarah Martinez',
+            testimonial1Role: 'Startup Founder',
+            testimonial2Text: '"The communication was transparent, and the final product exceeded all our expectations. A true problem-solver."',
+            testimonial2Author: 'Alex Lee',
+            testimonial2Role: 'Project Manager, Roblox',
+            contactTitle: 'get in touch',
+            contactSubtitle: 'Ready to start your next project?',
+            contactLeadText: 'I am available for new opportunities and collaborations. If you have a project in mind or just want to connect, feel free to reach out.',
+            contactEmailLabel: 'email',
+            contactFollowMe: 'follow me',
+            formNameLabel: 'name',
+            formEmailLabel: 'email',
+            formMessageLabel: 'message',
+            formSubmitBtn: 'send message',
+            footerTagline: 'Creating digital experiences with code.',
+            footerLocation: 'Salvador, Brazil',
+            footerNavHeading: 'navigation',
+            footerConnectHeading: 'connect',
+            footerCopyright: 'simple. all rights reserved.',
+        }
+    };
 
     function initPreloader() {
         if (!splineViewer || !preloader) return;
@@ -57,26 +202,11 @@ document.addEventListener('DOMContentLoaded', () => {
             navbar.classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        if (navLinksContainer && navIndicator) {
-            navLinks.forEach(link => {
-                link.addEventListener('mouseenter', () => {
-                    const { left, width } = link.getBoundingClientRect();
-                    const containerLeft = navLinksContainer.getBoundingClientRect().left;
-                    navIndicator.style.width = `${width}px`;
-                    navIndicator.style.left = `${left - containerLeft}px`;
-                });
-            });
-
-            navLinksContainer.addEventListener('mouseleave', () => {
-                navIndicator.style.width = '0';
-            });
-        }
-
-        if(mobileMenuToggle && navMenu) {
+        if (mobileMenuToggle && navMenu) {
             mobileMenuToggle.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-                mobileMenuToggle.classList.toggle('active');
-                body.classList.toggle('no-scroll'); 
+                const isActive = navMenu.classList.toggle('active');
+                mobileMenuToggle.classList.toggle('active', isActive);
+                body.classList.toggle('no-scroll', isActive);
             });
 
             navLinks.forEach(link => {
@@ -91,89 +221,73 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function initTypingEffect() {
-        if (typingElement) {
-            new Typed(typingElement, {
-                strings: ['software developer.', 'front-end specialist.', 'back-end engineer.', 'creative coder.', 'freelancer.', 'problem solver.'],
-                typeSpeed: 30,
+    /**
+     * Inicializa o efeito de digitação, recriando-o se já existir.
+     * @param {string[]} stringsArray - Um array de frases para o efeito.
+     */
+    function initTypingEffect(stringsArray) {
+        if (typingElement && typeof Typed !== 'undefined') {
+            if (typedInstance) {
+                typedInstance.destroy();
+            }
+            typedInstance = new Typed(typingElement, {
+                strings: stringsArray,
+                typeSpeed: 40,
                 backSpeed: 30,
                 backDelay: 2000,
-                startDelay: 700,
+                startDelay: 500,
                 loop: true,
                 smartBackspace: true
             });
         }
     }
-
-    function initCustomCursor() {
-        if (!customCursor || window.matchMedia("(max-width: 768px)").matches) return;
-
-        document.addEventListener('mousemove', e => {
-            requestAnimationFrame(() => {
-                customCursor.style.left = `${e.clientX}px`;
-                customCursor.style.top = `${e.clientY}px`;
-            });
-        });
-
-        const clickableElements = 'a, button, .cta-button, .project-card, .filter-btn, .skill-control, .social-link';
-        document.querySelectorAll(clickableElements).forEach(el => {
-            el.addEventListener('mouseenter', () => customCursor.classList.add('hover'));
-            el.addEventListener('mouseleave', () => customCursor.classList.remove('hover'));
-        });
-    }
-
+    
     function initSkillsCarousel() {
-        if (!skillsList || !skillsCarousel) return;
+        if (!skillsList) return;
 
         const skillItemsHTML = skills.map(skill => `
-            <li class="skill-item">
+            <li class="skill-item" data-tooltip="${skill.tooltip}">
                 <i class="${skill.iconClass}"></i>
                 <span>${skill.name}</span>
             </li>
         `).join('');
 
-        skillsList.innerHTML = skillItemsHTML.repeat(2); 
-        
-        if(skillControls) {
-            skillControls.addEventListener('click', (e) => {
-                const button = e.target.closest('.skill-control');
-                if(!button) return;
-
-                skillsList.style.animationPlayState = 'paused'; 
-
-                const skillItemWidth = skillsList.querySelector('.skill-item').offsetWidth;
-                const gap = parseInt(window.getComputedStyle(skillsList).gap);
-                const scrollAmount = skillItemWidth + gap;
-
-                if(button.classList.contains('next')) {
-                    skillsCarousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-                } else if(button.classList.contains('prev')) {
-                    skillsCarousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-                }
-
-                setTimeout(() => {
-                    skillsList.style.animationPlayState = 'running';
-                }, 3000);
-            });
-        }
+        skillsList.innerHTML = skillItemsHTML.repeat(2);
     }
 
     function initProjectsFilter() {
         if (!projectsFilter || projectCards.length === 0) return;
 
+        const filterProjects = (filterValue) => {
+            projectCards.forEach(card => {
+                const category = card.dataset.category;
+                const shouldShow = filterValue === 'all' || category.includes(filterValue);
+                card.style.display = shouldShow ? 'flex' : 'none';
+            });
+        };
+
         projectsFilter.addEventListener('click', (e) => {
-            const target = e.target;
-            if (!target.classList.contains('filter-btn')) return;
+            const target = e.target.closest('.filter-btn');
+            if (!target) return;
 
             projectsFilter.querySelector('.active').classList.remove('active');
             target.classList.add('active');
 
-            const filter = target.dataset.filter;
+            filterProjects(target.dataset.filter);
+        });
 
-            projectCards.forEach(card => {
-                const category = card.dataset.category;
-                const shouldShow = filter === 'all' || filter === category;
-                card.style.display = shouldShow ? 'flex' : 'none';
+        projectTags.forEach(tag => {
+            tag.addEventListener('click', (e) => {
+                e.preventDefault();
+                const filterValue = tag.dataset.filterTag;
+                const correspondingButton = projectsFilter.querySelector(`.filter-btn[data-filter="${filterValue}"]`);
+                
+                if (correspondingButton) {
+                    projectsFilter.querySelector('.active').classList.remove('active');
+                    correspondingButton.classList.add('active');
+                    filterProjects(filterValue);
+                    projectsContainer.scrollIntoView({ behavior: 'smooth' });
+                }
             });
         });
     }
@@ -191,62 +305,64 @@ document.addEventListener('DOMContentLoaded', () => {
             threshold: 0.1
         });
 
-        document.querySelectorAll('.fade-in-on-scroll').forEach((el, index) => {
-            if (el.classList.contains('project-card')) {
-                el.style.setProperty('--card-index', index % 3); 
-            }
+        document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
             observer.observe(el);
         });
     }
 
-function initContactForm() {
-    if (!contactForm) return;
+    function initContactForm() {
+        if (!contactForm) return;
 
-    async function handleSubmit(event) {
-        event.preventDefault();
-        const submitButton = contactForm.querySelector('button[type="submit"]');
-        const btnText = submitButton.querySelector('.btn-text');
-        const formData = new FormData(event.target);
+        const emailInput = contactForm.querySelector('#email');
+        
+        emailInput.addEventListener('input', () => {
+            const isValid = emailInput.checkValidity();
+            emailInput.style.borderColor = isValid ? 'var(--border-primary)' : '#ff4d4d';
+        });
 
-        btnText.textContent = 'sending...';
-        submitButton.disabled = true;
-
-        try {
-            const response = await fetch(event.target.action, {
-                method: contactForm.method,
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-
-            if (response.ok) {
-                btnText.textContent = 'message sent!';
-                contactForm.reset();
-                setTimeout(() => {
-                    btnText.textContent = 'send message';
-                    submitButton.disabled = false;
-                }, 3000);
-            } else {
-                btnText.textContent = 'error!';
-                submitButton.style.backgroundColor = '#ff4d4d'; 
-                 setTimeout(() => {
-                    btnText.textContent = 'send message';
-                    submitButton.disabled = false;
-                }, 3000);
+        async function handleSubmit(event) {
+            event.preventDefault();
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const btnText = submitButton.querySelector('.btn-text');
+            
+            if (!contactForm.checkValidity()) {
+                contactForm.reportValidity();
+                return;
             }
-        } catch (error) {
-            btnText.textContent = 'error!';
-            console.error('Form submission error:', error);
-            setTimeout(() => {
-                btnText.textContent = 'send message';
-                submitButton.disabled = false;
-            }, 3000);
-        }
-    }
 
-    contactForm.addEventListener("submit", handleSubmit);
-}
+            const formData = new FormData(event.target);
+            btnText.textContent = 'enviando...';
+            submitButton.disabled = true;
+
+            try {
+                const response = await fetch(event.target.action, {
+                    method: contactForm.method,
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    btnText.textContent = 'mensagem enviada!';
+                    submitButton.style.backgroundColor = '#34D399'; 
+                    contactForm.reset();
+                } else {
+                    throw new Error('Falha no envio');
+                }
+            } catch (error) {
+                btnText.textContent = 'erro ao enviar';
+                submitButton.style.backgroundColor = '#ff4d4d'; 
+                console.error('Erro no envio do formulário:', error);
+            } finally {
+                setTimeout(() => {
+                    btnText.textContent = 'enviar mensagem';
+                    submitButton.disabled = false;
+                    submitButton.style.backgroundColor = ''; 
+                }, 4000);
+            }
+        }
+
+        contactForm.addEventListener("submit", handleSubmit);
+    }
     
     function initSmoothScroll() {
         document.querySelectorAll('a.smooth-scroll').forEach(anchor => {
@@ -256,32 +372,95 @@ function initContactForm() {
                 const targetElement = document.querySelector(targetId);
 
                 if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
     }
-    
+
     function initFooterYear() {
         if (yearSpan) {
             yearSpan.textContent = new Date().getFullYear();
         }
     }
 
+    function initThemeSwitcher() {
+        if (!themeToggleButton) return;
+        
+        const applyTheme = (theme) => {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeToggleButton.innerHTML = theme === 'light' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+        };
+
+        themeToggleButton.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+        });
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        applyTheme(savedTheme);
+    }
+
+    /**
+     * Configura a lógica para o seletor de idioma, com animação.
+     */
+    function initLanguageSwitcher() {
+        if (!langSwitcher) return;
+
+        const translatePage = (language) => {
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                const translation = translations[language]?.[key];
+
+                if (translation) {
+                    element.classList.add('language-fade');
+                    setTimeout(() => {
+                        element.innerText = translation;
+                        if (element.classList.contains('nav-link')) {
+                            element.setAttribute('data-text', translation);
+                        }
+                    }, 250);
+                    setTimeout(() => {
+                        element.classList.remove('language-fade');
+                    }, 500);
+                }
+            });
+            document.documentElement.lang = language;
+        };
+
+        langSwitcher.addEventListener('click', (e) => {
+            const target = e.target.closest('.lang-option');
+            if (!target || target.classList.contains('active')) return;
+
+            e.preventDefault();
+            
+            langSwitcher.querySelector('.active').classList.remove('active');
+            target.classList.add('active');
+
+            const selectedLang = target.getAttribute('lang');
+            // Chama a tradução dos textos com data-key
+            translatePage(selectedLang);
+            // Chama a reinicialização do efeito de digitação
+            if (translations[selectedLang]?.typingStrings) {
+                initTypingEffect(translations[selectedLang].typingStrings);
+            }
+        });
+    }
+
     function init() {
         initPreloader();
         initNavbar();
-        initTypingEffect();
-        initCustomCursor();
+        initTypingEffect(translations['pt-BR'].typingStrings);
         initSkillsCarousel();
         initProjectsFilter();
         initScrollAnimations();
         initContactForm();
         initSmoothScroll();
         initFooterYear();
+        initThemeSwitcher(); 
+        initLanguageSwitcher(); 
     }
 
     init();

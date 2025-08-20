@@ -1168,6 +1168,26 @@ input, textarea, select {
     flex-shrink: 0;
 }
 
+/* Animação para a troca de idioma */
+.language-fade {
+    animation: fade-out-in 1.5s ease-in-out forwards;
+}
+
+@keyframes fade-out-in {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    50% {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .method-info {
     display: flex;
     flex-direction: column;
@@ -1449,6 +1469,251 @@ input, textarea, select {
 
 .project-card.fade-in-on-scroll {
     transition-delay: calc(0.15s * var(--card-index, 0));
+}
+
+/* ============================================= */
+/* === ESTILOS ADICIONAIS PARA REFATORAÇÃO === */
+/* ============================================= */
+
+/* === 1. Controles do Cabeçalho (Tema e Idioma) === */
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.theme-toggle {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    padding: var(--spacing-sm);
+    transition: color var(--transition-normal), transform var(--transition-normal);
+}
+
+.theme-toggle:hover {
+    color: var(--primary-color);
+    transform: rotate(15deg) scale(1.1);
+}
+
+.lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-family: var(--font-mono);
+    font-size: 14px;
+}
+
+.lang-option {
+    color: var(--text-tertiary);
+    font-weight: 500;
+    padding: var(--spacing-xs);
+    border-radius: var(--radius-xs);
+}
+
+.lang-option.active {
+    color: var(--primary-color);
+}
+
+.lang-divider {
+    color: var(--text-muted);
+}
+
+
+/* === 2. Seção Sobre Mim (Linha do Tempo) === */
+.timeline-section {
+    margin-top: var(--spacing-4xl);
+}
+
+.subsection-title {
+    text-align: center;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: var(--spacing-3xl);
+    color: var(--text-primary);
+}
+
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-left: var(--spacing-2xl);
+}
+
+/* A linha vertical da timeline */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    bottom: 10px;
+    width: 2px;
+    background: var(--border-primary);
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: var(--spacing-3xl);
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -7px; /* (16px - 2px) / 2 */
+    top: 6px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    border: 3px solid var(--background-secondary);
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+}
+
+.timeline-content {
+    position: relative;
+    padding-left: var(--spacing-2xl);
+}
+
+.timeline-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.timeline-description {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0;
+}
+
+.timeline-date {
+    display: block;
+    margin-top: var(--spacing-sm);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
+}
+
+
+/* === 3. Projetos (Novos Status) === */
+.status-dot.in-progress {
+    background: #FBBF24; /* Amarelo/Laranja */
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.status-dot.freelance {
+    background: #34D399; /* Verde */
+}
+
+
+/* === 4. Depoimentos (Avaliação com Estrelas) === */
+.testimonial-rating {
+    display: flex;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    color: #FBBF24; /* Cor de estrela */
+    font-size: 1.1rem;
+}
+
+
+/* === 5. Contato (Ícones Específicos) === */
+.contact-method i.fa-whatsapp {
+    color: #25D366; /* Cor do WhatsApp */
+}
+
+.social-link:hover i.fa-linkedin {
+    color: #0A66C2; /* Cor do LinkedIn no hover */
+}
+
+
+/* === 6. Rodapé (Localização) === */
+.footer-location {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--text-tertiary);
+    font-size: 14px;
+}
+
+
+/* === 7. Tema Claro (Light Mode) === */
+/* Adicione o atributo data-theme="light" no <html> via JS para ativar */
+html[data-theme='light'] {
+    --primary-color: #7C3AED;
+    --primary-dark: #6D28D9;
+    --primary-light: #A78BFA;
+    --accent-color: #5b00d3;
+    
+    --background-primary: #F8FAFC;
+    --background-secondary: #F1F5F9;
+    --background-tertiary: #E2E8F0;
+    --surface-elevated: #FFFFFF;
+    
+    --text-primary: #1E293B;
+    --text-secondary: #475569;
+    --text-tertiary: #94A3B8;
+    --text-muted: #CBD5E1;
+    
+    --border-primary: rgba(100, 116, 139, 0.2);
+    --border-secondary: rgba(100, 116, 139, 0.1);
+    --border-accent: rgba(124, 58, 237, 0.3);
+    
+    --shadow-glow: 0 0 40px rgba(124, 58, 237, 0.15);
+    --shadow-glow-strong: 0 0 80px rgba(124, 58, 237, 0.25);
+}
+
+/* Transição suave na troca de tema */
+body, .navbar, .project-card, .testimonial-card, .contact-form-container, .highlight-item, .skill-item {
+    transition: background-color var(--transition-normal), border-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* Ajustes específicos para o tema claro */
+html[data-theme='light'] ::-webkit-scrollbar-track {
+    background: var(--background-secondary);
+}
+
+html[data-theme='light'] ::-webkit-scrollbar-thumb {
+    border-color: var(--background-secondary);
+}
+
+html[data-theme='light'] .navbar {
+    background: rgba(248, 250, 252, 0.8);
+}
+html[data-theme='light'] .navbar.scrolled {
+    background: rgba(248, 250, 252, 0.95);
+}
+
+html[data-theme='light'] .hero-overlay {
+    background: rgba(248, 250, 252, 0.3);
+}
+
+html[data-theme='light'] #about.section::before {
+     background: linear-gradient(to bottom, transparent 0%, var(--background-primary) 250px);
+}
+
+
+/* === 8. Ajustes Responsivos para Novos Elementos === */
+@media (max-width: 768px) {
+    .nav-controls {
+        /* Esconde o seletor de idioma no mobile para simplificar */
+        .lang-switcher {
+            display: none;
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .timeline {
+        padding-left: var(--spacing-lg);
+    }
+    .timeline-content {
+        padding-left: var(--spacing-lg);
+    }
+    .timeline-dot {
+        left: -8px;
+    }
 }
 
 @keyframes spin {
