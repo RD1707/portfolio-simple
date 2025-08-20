@@ -180,6 +180,68 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // pega o spline viewer (mude o seletor se necessário)
+        const spline = document.querySelector('spline-viewer') || document.querySelector('.spline-embed');
+        if (spline) {
+        let overSpline = false;
+
+        // marca quando o ponteiro entra/sai do viewer
+        spline.addEventListener('pointerenter', () => { overSpline = true; });
+        spline.addEventListener('pointerleave', () => { overSpline = false; });
+
+        // previne roda do mouse quando estiver sobre o viewer
+        window.addEventListener('wheel', (e) => {
+            if (overSpline) {
+            e.preventDefault();
+            }
+        }, { passive: false, capture: true });
+
+        // previne scroll por toque (mobile)
+        window.addEventListener('touchmove', (e) => {
+            if (overSpline) {
+            e.preventDefault();
+            }
+        }, { passive: false, capture: true });
+
+        // pra Firefox antigo (opcional)
+        window.addEventListener('DOMMouseScroll', (e) => {
+            if (overSpline) e.preventDefault();
+        }, { passive: false, capture: true });
+        }
+
+
+        // BLOQUEADOR DE SCROLL NO SPLINE
+        const splineBlocker = document.querySelector('.spline-blocker');
+        if (splineBlocker) {
+        // previne roda do mouse sobre o viewer
+        splineBlocker.addEventListener('wheel', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+        }, { passive: false });
+
+        // previne toque/arrastar em mobile
+        splineBlocker.addEventListener('touchmove', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+        }, { passive: false });
+
+        // opcional: previne clicks/drag/pointerdown
+        splineBlocker.addEventListener('pointerdown', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+        }, { passive: false });
+        } else {
+        // fallback: se não existir overlay, restaure a lógica por flag (remova pointer-events:none do viewer)
+        let overSpline = false;
+        const splineEl = document.querySelector('spline-viewer') || document.querySelector('.spline-embed');
+        if (splineEl) {
+            splineEl.addEventListener('pointerenter', ()=> overSpline = true);
+            splineEl.addEventListener('pointerleave', ()=> overSpline = false);
+            window.addEventListener('wheel', (e)=> { if (overSpline) { e.preventDefault(); } }, { passive:false, capture:true });
+            window.addEventListener('touchmove', (e)=> { if (overSpline) { e.preventDefault(); } }, { passive:false, capture:true });
+        }
+        }
+
     function initPreloader() {
         if (!splineViewer || !preloader) return;
         let isLoaded = false;
@@ -383,26 +445,6 @@ document.addEventListener('DOMContentLoaded', () => {
             yearSpan.textContent = new Date().getFullYear();
         }
     }
-
-    function initThemeSwitcher() {
-        if (!themeToggleButton) return;
-        
-        const applyTheme = (theme) => {
-            document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-            themeToggleButton.innerHTML = theme === 'light' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
-        };
-
-        themeToggleButton.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            applyTheme(newTheme);
-        });
-
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        applyTheme(savedTheme);
-    }
-
     /**
      * Configura a lógica para o seletor de idioma, com animação.
      */
@@ -452,7 +494,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function init() {
         initPreloader();
         initNavbar();
-        initTypingEffect(translations['pt-BR'].typingStrings);
+        initTypingEffect(translations['en'].typingStrings);
         initSkillsCarousel();
         initProjectsFilter();
         initScrollAnimations();

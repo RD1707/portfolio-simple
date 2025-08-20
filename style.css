@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-    --primary-color: #A855F7;
-    --primary-dark: #9333EA;
-    --primary-light: #C084FC;
-    --accent-color: #5b00d3;
-    --accent-dark: #672394;
+    --primary-color: #3B82F6;       /* Azul principal */
+    --primary-dark: #2563EB;        /* Azul mais escuro */
+    --primary-light: #60A5FA;       /* Azul claro */
+    --accent-color: #1E40AF;        /* Azul marinho escuro para acentos */
+    --accent-dark: #1E3A8A;
     
     --background-primary: #0A0A0F;
     --background-secondary: #121218;
@@ -19,14 +19,14 @@
     
     --border-primary: rgba(148, 163, 184, 0.1);
     --border-secondary: rgba(148, 163, 184, 0.05);
-    --border-accent: rgba(168, 85, 247, 0.2);
+    --border-accent: rgba(59, 130, 246, 0.2); /* Borda com o novo tom de azul */
     
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    --shadow-glow: 0 0 40px rgba(168, 85, 247, 0.15);
-    --shadow-glow-strong: 0 0 80px rgba(168, 85, 247, 0.25);
+    --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.15); /* Sombra com o novo tom de azul */
+    --shadow-glow-strong: 0 0 80px rgba(59, 130, 246, 0.25);
     
     --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
     --gradient-accent: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
@@ -366,7 +366,6 @@ input, textarea, select {
 .hero-bg spline-viewer {
     width: 100%;
     height: 100%;
-    pointer-events: none;
 }
 
 .hero-overlay {
@@ -378,6 +377,20 @@ input, textarea, select {
     background: rgba(10, 10, 15, 0.3);
     z-index: 2;
     pointer-events: none; 
+}
+
+/* wrapper/overlay para bloquear interação com o spline */
+.spline-wrap { position: absolute; inset: 0; width: 100%; height: 100%; }
+.spline-wrap .spline-viewer { width: 100%; height: 100%; pointer-events: auto; }
+
+/* overlay transparente que captura roda e toque */
+.spline-blocker {
+  position: absolute;
+  inset: 0;
+  z-index: 6;              /* acima do viewer, abaixo da UI principal */
+  background: transparent; /* mantém aparência */
+  pointer-events: auto;    /* precisa capturar eventos */
+  touch-action: none;      /* desativa gestos de toque */
 }
 
 .hero-gradient {
@@ -399,8 +412,27 @@ input, textarea, select {
 
 .hero-content {
     max-width: 800px;
-    text-align: center;
-    margin: 0 auto;
+    text-align: left; /* Altera de 'center' para 'left' */
+    margin: 0;        /* Remove a centralização automática */
+}
+
+.hero-description {
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 0 var(--spacing-2xl); /* Ajusta a margem para alinhamento esquerdo */
+    line-height: 1.7;
+    animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.hero-cta-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Altera de 'center' para 'flex-start' */
+    gap: var(--spacing-lg);
+    animation: fadeInUp 0.8s ease-out 1s both;
+    position: relative; 
+    z-index: 5;         
 }
 
 .hero-title {
@@ -421,15 +453,6 @@ input, textarea, select {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-}
-
-.hero-description {
-    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-    color: var(--text-secondary);
-    max-width: 600px;
-    margin: 0 auto var(--spacing-2xl);
-    line-height: 1.7;
-    animation: fadeInUp 0.8s ease-out 0.6s both;
 }
 
 .hero-stats {
@@ -464,16 +487,6 @@ input, textarea, select {
     width: 1px;
     height: 40px;
     background: var(--border-primary);
-}
-
-.hero-cta-group {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-lg);
-    animation: fadeInUp 0.8s ease-out 1s both;
-    position: relative; 
-    z-index: 5;         
 }
 
 .hero-scroll-indicator {
