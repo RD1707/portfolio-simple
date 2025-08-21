@@ -860,61 +860,6 @@ input, textarea, select {
     text-align: center;
 }
 
-.testimonials-section {
-    background: var(--background-primary);
-}
-
-.testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: var(--spacing-2xl);
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.testimonial-card {
-    background: var(--gradient-surface);
-    border: 1px solid var(--border-primary);
-    border-radius: var(--radius-xl);
-    padding: var(--spacing-2xl);
-    position: relative;
-    transition: all var(--transition-normal);
-}
-
-.testimonial-card:hover {
-    border-color: var(--primary-color);
-    box-shadow: var(--shadow-glow);
-}
-
-.testimonial-text {
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    line-height: 1.7;
-    font-style: italic;
-}
-
-.testimonial-author {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-lg);
-}
-
-.author-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.author-name {
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 2px;
-}
-
-.author-role {
-    font-size: 14px;
-    color: var(--text-tertiary);
-}
-
 .contact-section {
     background: var(--background-primary);
 }
@@ -968,11 +913,6 @@ input, textarea, select {
     color: var(--text-primary);
     font-size: 18px;
     flex-shrink: 0;
-}
-
-/* Animação para a troca de idioma */
-.language-fade {
-    animation: fade-out-in 1.5s ease-in-out forwards;
 }
 
 @keyframes fade-out-in {
